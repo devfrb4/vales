@@ -3,8 +3,8 @@ from .models import Person
 
 class PersonForm(forms.ModelForm):
 
-	def save(self, user, *args, **kwargs):
-		self.instance.user = user
+	def save(self, *args, **kwargs):
+		self.instance.user = kwargs.pop('user', None)
 		super(PersonForm, self).save(*args, **kwargs)
 
 	class Meta:
