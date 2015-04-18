@@ -4,16 +4,10 @@ from contactos import views as contacto_views
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', contacto_views.home, name='home'),
+    url(r'^$', 'contactos.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/$', contacto_views.login_view, name='login'),
-    url(r'^signup/$', contacto_views.register, name='signup'),
-    url(r'^logout/$', contacto_views.logout, name='logout'),
-
-
-    url(r'^persons/new/$', contacto_views.PersonView.as_view(), name='person-new'),
-    url(r'^contactos/$', contacto_views.get_contactos, name='get_contactos')
-
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^contactos/', include('contactos.urls', namespace='contactos'))
 )

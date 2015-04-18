@@ -19,10 +19,10 @@
               <h3 class="masthead-brand">Mis Vales</h3>
               <nav>
                 <ul class="nav masthead-nav">
-                  {% if user %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                  {% if not user.is_authenticated %}
+                    <li><a href="{% url 'accounts:login' %}">Login</a></li>
                   {% else %}
-                  <li><a href="{% url 'logout' %}">Logout</a></li>
+                  <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                   {% endif %}      
                 </ul>
               </nav>
@@ -33,7 +33,7 @@
             <h1 class="cover-heading">Mis vales.</h1>
             <p class="lead">Es tu directorio en donde podras guardar a todos tus contactos y valedores, plataforma hecha en Django para toda la comunidad del Dev.F y ya no se que mas poner.</p>
             <p class="lead">
-              <a href="{% url 'signup' %}" class="btn btn-lg btn-default">Registrarse</a>
+              <a href="{% url 'accounts:signup' %}" class="btn btn-lg btn-default">Registrarse</a>
             </p>
           </div>
 

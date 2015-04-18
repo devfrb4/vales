@@ -11,7 +11,7 @@ from . import forms as cForms
 
 
 class PersonView(View):
-    template_name = 'person.html'
+    template_name = 'contactos/person.html'
 
     def get(self, request):
         form = cForms.PersonForm()
@@ -22,7 +22,7 @@ class PersonView(View):
 
         if form.is_valid():
             form.save(user=request.user)
-            return redirect('/')
+            return redirect(reverse('contactos:get_contactos'))
         else:
             return render(request, self.template_name, locals())
 
@@ -30,50 +30,9 @@ class PersonView(View):
         return super(PersonView, self).dispatch(request, *args, **kwargs)
 
 
-
 def home(request):
-    return render(
-        request,
-        'index.html',
-        {}
-    )
+    return render(request, 'index.html')
 
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('login'))
-    else:
-        form = UserCreationForm()
-    return render(
-        request, 'register.html', {'form': form}
-    )
-
-
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        print user
-        if user is not None and user.is_active:
-            login(request, user)
-            return redirect(reverse('get_contactos'))
-        else:
-            return redirect(reverse('login'))
-    else:
-        form = AuthenticationForm()
-        return render(
-            request,
-            'login.html',
-            {'form': form}
-        )
-
-
-def logout_view(request):
-    logout(request)
-    return redirect(reverse('login'))
 
 @login_required
 def get_contactos(request):
@@ -82,6 +41,6 @@ def get_contactos(request):
 
     return render(
         request,
-        'contactos.html',
+        'contactos/contactos.html',
         {'contactos': contactos}
     )
