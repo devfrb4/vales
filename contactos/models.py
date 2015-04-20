@@ -27,3 +27,13 @@ class Group(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Notes(models.Model):
+    title = models.CharField(max_length=50, verbose_name='Titulo')
+    content = models.TextField(max_length=300, verbose_name='contenido')
+    color = models.CharField(max_length=25, verbose_name='Color')
+    user = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return self.title
