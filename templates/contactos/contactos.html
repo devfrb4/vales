@@ -1,11 +1,23 @@
 {% extends 'bases/base.html' %}
 
 {% block content %}
+	<a class='btn btn-default' href="{% url 'contactos:person-new' %}">Agregar Contacto</a>
 	<div class="container">
+		<table class="table table-hover">
+			<th>#</th>
+			<th>Nombre</th>
+			<th>Número</th>
+			<th>Email</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
 		{% for contacto in contactos %}
-			<p>{{ contacto.name }}</p>
-			<p>{{ contacto.number }}</p>
-			<p>{{ contacto.email }}</p>
+			<tr>
+				<td>{{ contacto.pk }}</td>
+				<td>{{ contacto.name }}</td>
+				<td>{{ contacto.number }}</td>
+				<td>{{ contacto.email }}</td>	
+			</tr>
 		{% endfor %}
+		</table>
 	</div>
 {% endblock %}
