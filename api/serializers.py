@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Person, Group
+from contactos.models import Person, Group
 from rest_framework import serializers
 
 class PersonSerializer(serializers.ModelSerializer):
